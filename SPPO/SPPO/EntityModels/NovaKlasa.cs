@@ -7,5 +7,6 @@ namespace SPPO.EntityModels
 {
     public class NovaKlasa
     {
+        public int Id { get; set; }
     }
 }
