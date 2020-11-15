@@ -39,11 +39,9 @@ namespace SPPO.MyDBContext
         {
             optionsBuilder.UseSqlServer(@" Server=app.fit.ba,1431;
                                     Database=SPPO;
-Trusted_Connection=false;
-User id=p2017;
-Password=aX55XX!;
-
-                                   
+                                    Trusted_Connection=false;
+                                    User id=p2017;
+                                    Password=aX55XX!;
                                     MultipleActiveResultSets=true;");
 
         }
