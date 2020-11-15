@@ -1,0 +1,188 @@
+﻿@model UserRegistracijaVM
+@{
+    ViewData["Title"] = "Registration";
+}
+<h1 style="background-color:deepskyblue;padding-left:20px;color:white;margin:0;width:75%">
+    REGISTRATION FORM
+    <hr style="background-color:white;margin-right:50%;" />
+    <p style="font-size:18px;color:black;margin:0;padding-bottom:20px">Register here to become a member of our website</p>
+</h1>
+<form class="form-group" action="/User/Save" style="background-color:#f8f8f8;padding:35px 0 0 100px;width:75%;" id="form">
+    <div id="d-UserComp">
+        <b><p>Who are you ?</p></b>
+        <input type="radio" id="company" name="account" value="Company" onclick="ucitaj()">
+        <label class="lbl">Company</label>
+        <input type="radio" id="user" name="account" value="User" onclick="ucitaj()">
+        <label class="lbl">User</label><br>
+    </div>
+
+    <div id="forma">
+        <p class="comp">Comapny Representer:</p>
+        <div id="d-firstName">
+            <label>First Name :</label>
+            <input asp-for="FirstName" id="fname" />
+            <span asp-validation-for="FirstName"></span>
+
+        </div>
+        <div id="d-lastName" >
+            <label>Last Name :</label>
+            <input id="lname" asp-for="LastName" />
+        </div>
+        <div id="d-email">
+            <label>Email :</label>
+            <input id="email" asp-for="Email" />
+        </div>
+        <div id="d-phoneNumber">
+            <label>Phone Number :</label>
+            <input id="phoneNumber" asp-for="PhoneNumber" />
+        </div>
+        <div class="comp">
+            <label>Company Name:</label>
+            <input id="companyname" asp-for="CompanyName"/>
+
+        </div>
+        <div id="d-birthdate" class="usr" >
+            <label>Date of Birth :</label>
+            <input type="date" id="birthdate" asp-for="BirthDate"/>
+        </div>
+        <div id="d-username">
+            <label>UserName: </label>
+            <input  id="userName" asp-for="UserName" />
+        </div>
+        <div id="d-password">
+            <label>Password :</label>
+            <input id="password" asp-for="Password" type="password" />
+        </div>
+        <div id="d-confirmpassword">
+            <label>Confirm Password :</label>
+            <input id="confirmPassword" asp-for="ConfirmPassword" type="password" />
+        </div>
+        <button type="submit" id="btn-create">CREATE NEW ACCOUNT</button>
+    </div>
+</form>
+<style>
+    #user {
+        margin-left: 30px;
+    }
+
+    #company {
+        margin-left: 30px;
+    }
+
+    .lbl:hover {
+        opacity: 1;
+        color: deepskyblue;
+    }
+
+    #form {
+        box-shadow: -30px 30px 20px rgba(0,0,0,0.3);
+    }
+    
+
+    #companyname {
+        margin-left: 45px;
+        padding-right: 200px;
+    }
+
+    #fname, #lname {
+        margin-left: 80px;
+        padding-right: 200px;
+    }
+
+    div {
+        padding: 10px;
+    }
+
+    input {
+        padding: 6px;
+    }
+
+    #email {
+        margin-left: 116px;
+        padding-right: 200px;
+    }
+
+    #phoneNumber {
+        margin-left: 45px;
+        padding-right: 200px;
+    }
+    #birthdate{
+       margin-left:60px;
+    }
+
+
+
+
+    #userName {
+        padding-right: 200px;
+        margin-left: 75px;
+    }
+
+    #password {
+        padding-right: 200px;
+        margin-left: 83px;
+    }
+
+    #confirmPassword {
+        padding-right: 200px;
+        margin-left: 20px;
+    }
+
+    #btn-create {
+        color: white;
+        background-color: deepskyblue;
+        font-weight: bold;
+        margin: 20px 0px 20px 250px;
+        border: solid 5px #ffffff;
+        padding: 15px;
+    }
+</style>
+
+<script>
+
+
+
+    window.onload = function () {
+        var forma = document.getElementById("forma");
+        forma.style.display = "none";
+    }
+
+    function ucitaj() {
+        var forma = document.getElementById("forma");
+
+        forma.style.display = "block";
+        var com = document.getElementById("company");
+        var user = document.getElementById("user");
+
+        if (com.checked == true) {
+            var x = document.getElementsByClassName("usr");
+            for (var i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            var y = document.getElementsByClassName("comp");
+            for (var p = 0; p < y.length; p++) {
+                y[p].style.display = "block";
+            }
+
+        }
+        else if (user.checked == true) {
+            var x = document.getElementsByClassName("comp");
+            for (var i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            var y = document.getElementsByClassName("usr");
+            for (var p = 0; p < y.length; p++) {
+                y[p].style.display = "block";
+            }
+        }
+            forma.style.display = "block";
+
+
+        
+
+    } 
+
+
+
+
+</script>
