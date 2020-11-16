@@ -59,5 +59,32 @@ namespace SPPO.Controllers
             }
             return View("Save");
         }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(UserRegistracijaVM account)
+        {
+            MyDbContext db = new MyDbContext();
+            if (ModelState.IsValid)
+            {
+                var user = db.accounts.Where(a => a.UserName == account.UserName && a.PasswordHash == account.Password).ToList();
+                if (user.FirstOrDefault() != null)
+                {
+                    TempData["UserName"] = user.FirstOrDefault().UserName;
+                    return Redirect("Prikazi");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Neuspješan login, pokušajte ponovo!.");
+                }
+            }
+            return View(account);
+        }
+        public IActionResult Prikazi()
+        {
+            return View();
+        }
     }
 }
