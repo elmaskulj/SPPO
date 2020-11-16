@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SPPO.EntityModels
+namespace SPPO.Models
 {
-    public class Category
+    public class CategoryGetAllVM
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
-        public string PhotoURL { get; set; }
-
         public string Description { get; set; }
+        public string photoURL { get; set; }
     }
 }
