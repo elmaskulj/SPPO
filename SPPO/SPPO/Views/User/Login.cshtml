@@ -1,35 +1,68 @@
-﻿<link href="~/styles/font-awesome.min.css" rel="stylesheet" />
-<link href="~/styles/style.css" rel="stylesheet" />
+﻿@model SPPO.Models.UserRegistracijaVM
+@{
+    ViewBag.Title = "Logina";
+    //Layout = "_LayoutGuest";
+}
+<h2>e-Posao</h2>
+@using (Html.BeginForm())
+{
 
-<body>
-    <div class="main-bg">
-        <!-- title -->
-        <h1>Posao</h1>
-        <!-- //title -->
-        <!-- content -->
-        <div class="sub-main-w3">
-            <div class="bg-content-w3pvt">
-                <div class="top-content-style">
-                    <img src="images/user.jpg" alt="" />
-                </div>
-                <form action="#" method="post">
-                    <p class="legend">Login Here<span class="fa fa-hand-o-down"></span></p>
-                    <div class="input">
+    @Html.ValidationSummary(true)
+
+    <div style="border: solid 1px #ccc; padding: 30px 0 30px 30px; border-radius: 5px;
+        width: 325px; margin: auto; display: table; ">
+        <table>
+            <tr>
+                @*<td valign="top">
+                        @Html.LabelFor(model => model.UserName)
+                    </td>*@
+                @*<div class="input">
+                         @Html.LabelFor(model => model.UserName)
                         <input type="UserName" placeholder="UserName" name="UserName" required />
-                        <span class="fa fa-envelope"></span>
-                    </div>
-                    <div class="input">
-                        <input type="Password" placeholder="Password" name="Password" required />
-                        <span class="fa fa-unlock"></span>
-                    </div>
-                    <button type="submit" class="btn submit">
-                        <span class="fa fa-sign-in"></span>
-                    </button>
-                </form>
-                <a href="#" class="bottom-text-w3ls">Forgot Password?</a>
-            </div>
-        </div>
-
+                    </div>*@
+                <div class="col-sm-10">
+                    <input asp-for="UserName" class="form-control" placeholder="UserName" />
+                    <span asp-validation-for="UserName"></span>
+                </div>
+                @*<td>
+                        @Html.EditorFor(model => model.UserName)
+                        <div style="height: 20px;">
+                            @Html.ValidationMessageFor(model => model.UserName)
+                        </div>
+                    </td>*@
+            </tr>
+            <tr>
+                @*<td valign="top">
+                            @Html.LabelFor(model => model.Password)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Password)
+                            <div style="height: 20px;">
+                                @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                    </td>*@
+                <div class="input">
+                    @Html.LabelFor(model => model.Password)
+                    <input type="password" placeholder="Password" name="password" required />
+                    @*<input asp-for="PasswordHash" class="form-control" placeholder="Password" />
+                    <span asp-validation-for="PasswordHash"></span>*@
+                </div>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+            <tr>
+                <td>
+                    <a href="#" class="bottom-text-w3ls">Forgot Password?</a>
+                </td>
+            </tr>
+        </table>
     </div>
-</body>
-</html>
+}
+<style>
+    #input {
+    }
+</style>
