@@ -13,6 +13,11 @@ namespace SPPO.Controllers
 {
     public class UserController : Controller
     {
+        private MyDbContext _context;
+        public UserController(MyDbContext context)
+        {
+            _context = context;
+        }
         public IActionResult Registracija()
         {
 
@@ -22,7 +27,7 @@ namespace SPPO.Controllers
         {
             if (ModelState.IsValid)
             {
-                MyDbContext db = new MyDbContext();
+                //MyDbContext db = new MyDbContext();
 
                 Account a = new Account();
                 if (m.CompanyName is null)
@@ -34,8 +39,8 @@ namespace SPPO.Controllers
                     u.PhoneNumber = m.PhoneNumber;
                     u.Email = m.Email;
 
-                    db.Add(u);
-                    db.SaveChanges();
+                    _context.Add(u);
+                    _context.SaveChanges();
 
                     a = new Account();
                     a.UserID = u.Id;
@@ -47,15 +52,15 @@ namespace SPPO.Controllers
                     c.Name = m.CompanyName;
                     c.PhoneNumber = m.PhoneNumber;
 
-                    db.Add(c);
-                    db.SaveChanges();
+                    _context.Add(c);
+                    _context.SaveChanges();
 
                     a.CompanyID = c.Id;
                 }
                 a.UserName = m.UserName;
                 a.PasswordHash = m.Password;
-                db.Add(a);
-                db.SaveChanges();
+                _context.Add(a);
+                _context.SaveChanges();
             }
             return View("Save");
         }
@@ -66,10 +71,10 @@ namespace SPPO.Controllers
         [HttpPost]
         public IActionResult Login(UserRegistracijaVM account)
         {
-            MyDbContext db = new MyDbContext();
+            //MyDbContext db = new MyDbContext();
             if (ModelState.IsValid)
             {
-                var user = db.accounts.Where(a => a.UserName == account.UserName && a.PasswordHash == account.Password).ToList();
+                var user = _context.accounts.Where(a => a.UserName == account.UserName && a.PasswordHash == account.Password).ToList();
                 if (user.FirstOrDefault() != null)
                 {
                     TempData["UserName"] = user.FirstOrDefault().UserName;

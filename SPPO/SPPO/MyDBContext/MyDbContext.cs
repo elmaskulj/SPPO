@@ -35,16 +35,8 @@ namespace SPPO.MyDBContext
         public DbSet<News> news { get; set; }
         public DbSet<Role> roles { get; set; }
         public DbSet<Transaction> transactions { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@" Server=app.fit.ba,1431;
-                                    Database=SPPO;
-                                    Trusted_Connection=false;
-                                    User id=p2017;
-                                    Password=aX55XX!;
-                                    MultipleActiveResultSets=true;");
-
-        }
+        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AccountGrade>()

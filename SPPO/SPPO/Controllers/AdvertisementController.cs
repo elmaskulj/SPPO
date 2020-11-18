@@ -12,11 +12,17 @@ namespace SPPO.Controllers
 {
     public class AdvertisementController : Controller
     {
+        private MyDbContext _context;
+        public AdvertisementController(MyDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult AddAdv()
         {
-           MyDbContext db = new MyDbContext();
+           //MyDbContext db = new MyDbContext();
 
-            List<SelectListItem> jobs = db.jobs.Select(a => new SelectListItem
+            List<SelectListItem> jobs = _context.jobs.Select(a => new SelectListItem
             {
                 Value = a.Id.ToString(),
                 Text = a.Name
@@ -31,7 +37,7 @@ namespace SPPO.Controllers
         {
             if (ModelState.IsValid==true)
             {
-                MyDbContext db = new MyDbContext();
+                //MyDbContext db = new MyDbContext();
 
                 Advertisement a = new Advertisement();
                 a.Name = m.Name;
@@ -40,8 +46,8 @@ namespace SPPO.Controllers
                 a.EndDate = m.EndDate;
                 a.JobId = m.JobId;
 
-                db.Add(a);
-                db.SaveChanges();
+                _context.Add(a);
+                _context.SaveChanges();
             }
             return Redirect("/Home/Index");
         }
